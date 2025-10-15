@@ -1,1 +1,191 @@
-<h1> Hello </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston House Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d9edf7;
+            border: 1px solid #bce8f1;
+            color: #31708f;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Boston House Price Prediction</h1>
+    <p>Enter the feature values below to estimate the median house price (in $1000s).</p>
+    
+    <form id="predictionForm">
+        
+        <div class="form-group">
+            <label for="CRIM">1. CRIM (Per capita crime rate by town)</label>
+            <input type="number" step="any" id="CRIM" required value="0.00632">
+        </div>
+        <div class="form-group">
+            <label for="ZN">2. ZN (Proportion of residential land zoned for lots over 25,000 sq.ft.)</label>
+            <input type="number" step="any" id="ZN" required value="18.0">
+        </div>
+        <div class="form-group">
+            <label for="INDUS">3. INDUS (Proportion of non-retail business acres per town)</label>
+            <input type="number" step="any" id="INDUS" required value="2.31">
+        </div>
+
+        <div class="form-group">
+            <label for="CHAS">4. CHAS (Charles River dummy variable: 1 if tract bounds river; 0 otherwise)</label>
+            <input type="number" step="any" id="CHAS" required value="0.0">
+        </div>
+        <div class="form-group">
+            <label for="NOX">5. NOX (Nitric oxides concentration (parts per 10 million))</label>
+            <input type="number" step="any" id="NOX" required value="0.538">
+        </div>
+        <div class="form-group">
+            <label for="RM">6. RM (Average number of rooms per dwelling)</label>
+            <input type="number" step="any" id="RM" required value="6.575">
+        </div>
+
+        <div class="form-group">
+            <label for="AGE">7. AGE (Proportion of owner-occupied units built prior to 1940)</label>
+            <input type="number" step="any" id="AGE" required value="65.2">
+        </div>
+        <div class="form-group">
+            <label for="DIS">8. DIS (Weighted distances to five Boston employment centres)</label>
+            <input type="number" step="any" id="DIS" required value="4.0900">
+        </div>
+        <div class="form-group">
+            <label for="RAD">9. RAD (Index of accessibility to radial highways)</label>
+            <input type="number" step="any" id="RAD" required value="1.0">
+        </div>
+        
+        <div class="form-group">
+            <label for="TAX">10. TAX (Full-value property-tax rate per $10,000)</label>
+            <input type="number" step="any" id="TAX" required value="296.0">
+        </div>
+        <div class="form-group">
+            <label for="PTRATIO">11. PTRATIO (Pupil-teacher ratio by town)</label>
+            <input type="number" step="any" id="PTRATIO" required value="15.3">
+        </div>
+        <div class="form-group">
+            <label for="B">12. B ($1000(Bk - 0.63)^2$ where Bk is the proportion of Black residents by town)</label>
+            <input type="number" step="any" id="B" required value="396.90">
+        </div>
+        <div class="form-group">
+            <label for="LSTAT">13. LSTAT (% lower status of the population)</label>
+            <input type="number" step="any" id="LSTAT" required value="4.98">
+        </div>
+
+        <button type="submit">Predict Price</button>
+    </form>
+    
+    <div id="predictionResult" class="result" style="display:none;">
+        Predicted Price: $<span id="predictedValue"></span>k
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('predictionForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Stop the default form submission
+
+        // 1. Collect all input values into a data object
+        const formData = {
+            "CRIM": parseFloat(document.getElementById('CRIM').value),
+            "ZN": parseFloat(document.getElementById('ZN').value),
+            "INDUS": parseFloat(document.getElementById('INDUS').value),
+            "CHAS": parseFloat(document.getElementById('CHAS').value),
+            "NOX": parseFloat(document.getElementById('NOX').value),
+            "RM": parseFloat(document.getElementById('RM').value),
+            "AGE": parseFloat(document.getElementById('AGE').value),
+            "DIS": parseFloat(document.getElementById('DIS').value),
+            "RAD": parseFloat(document.getElementById('RAD').value),
+            "TAX": parseFloat(document.getElementById('TAX').value),
+            "PTRATIO": parseFloat(document.getElementById('PTRATIO').value),
+            "B": parseFloat(document.getElementById('B').value),
+            "LSTAT": parseFloat(document.getElementById('LSTAT').value)
+        };
+
+        // 2. Wrap the data in the required "data" key for your Flask API
+        const payload = { "data": formData };
+
+        // 3. Make the API call to your Flask endpoint
+        fetch('/predict_api', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 4. Display the prediction result
+            const price = parseFloat(data).toFixed(2); // Format to 2 decimal places
+            document.getElementById('predictedValue').textContent = price;
+            document.getElementById('predictionResult').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('Prediction failed. Check console for details.');
+        });
+    });
+</script>
+
+</body>
+</html>

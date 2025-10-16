@@ -1,4 +1,5 @@
 Boston House Price Prediction
+
 This project implements a Machine Learning model to predict house prices in the Boston area and deploys it as a Flask web application. The goal is to provide a simple interface where a user can input various socio-economic and environmental factors to get an estimated house price.
 
 The core components are:

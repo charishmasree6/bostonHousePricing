@@ -47,8 +47,6 @@ Ensure your virtual environment is active.
 Run the main application file:
 
 Bash
-python app.py
-Access the application: Open your web browser and navigate to the address displayed in the terminal (typically http://127.0.0.1:5000)
 
 python app.py
 Access the application: Open your web browser and navigate to the address displayed in the terminal (typically http://127.0.0.1:5000).

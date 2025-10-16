@@ -1,30 +1,53 @@
-1. Activate the Environment
-In your VS Code terminal (or whichever terminal you are using), ensure you activate the environment you created earlier:
+Boston House Price Prediction
+This project implements a Machine Learning model to predict house prices in the Boston area and deploys it as a Flask web application. The goal is to provide a simple interface where a user can input various socio-economic and environmental factors to get an estimated house price.
+
+The core components are:
+
+HousePricePrediction.ipynb: Data cleaning, EDA, model training, and evaluation.
+
+regmodel.pkl: The saved, trained machine learning model.
+
+scaling.pkl: The saved feature scaling object (e.g., StandardScaler), crucial for preprocessing new user input before prediction.
+
+app.py: The Flask application logic that loads the model and handles web requests.
+
+templates/home.html: The HTML frontend for user interaction.
+
+⚙️ Setup and Installation
+Prerequisites
+Python 3.x
+
+Git
+
+Installation Steps
+Clone the repository:
 
 Bash
 
-conda activate .\venv
-Your prompt should change to look like this: (venv) C:\Users\chari\...\bostonHousePricing>
+git clone https://github.com/YourUsername/YourRepoName.git
+cd YourRepoName
+Create a virtual environment (Recommended):
 
-2. Install Flask and Other Dependencies
-Once the environment is active, you need to install Flask, scikit-learn (for the model/scalar), NumPy, and Pandas.
+Bash
 
-If you have a requirements.txt file in your project, run:
+python -m venv venv
+source venv/bin/activate  # macOS/Linux
+# venv\Scripts\activate   # Windows
+Install the required dependencies: All necessary Python libraries are listed in requirements.txt.
 
 Bash
 
 pip install -r requirements.txt
-If you do not have a requirements.txt file, you must manually install the packages mentioned in your script:
+🚀 How to Run the Web Application
+The application uses Flask and runs on a local server.
+
+Ensure your virtual environment is active.
+
+Run the main application file:
 
 Bash
-
-pip install flask numpy pandas scikit-learn
-(Note: Scikit-learn is required because pickle.load is used to load a scaler and model, which are typically scikit-learn objects.)
-
-3. Run the App
-After installation finishes, run your script again:
-
-Bash
+python app.py
+Access the application: Open your web browser and navigate to the address displayed in the terminal (typically http://127.0.0.1:5000)
 
 python app.py
-This time, Python will look for and find the installed Flask module inside the active (venv) environment, and your web server should start.
+Access the application: Open your web browser and navigate to the address displayed in the terminal (typically http://127.0.0.1:5000).

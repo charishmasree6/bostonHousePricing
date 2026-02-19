@@ -1,52 +1,117 @@
-Boston House Price Prediction
+Boston House Price Prediction – ML Web App
 
-This project implements a Machine Learning model to predict house prices in the Boston area and deploys it as a Flask web application. The goal is to provide a simple interface where a user can input various socio-economic and environmental factors to get an estimated house price.
+A Machine Learning powered web application that predicts house prices using a trained regression model. The app is built using Flask, Scikit-Learn, and deployed on Render Cloud.
 
-The core components are:
+🌐 Live Demo:
+https://bostonhousepricing-gcpp.onrender.com/
 
-HousePricePrediction.ipynb: Data cleaning, EDA, model training, and evaluation.
+🚀 Features
 
-regmodel.pkl: The saved, trained machine learning model.
+📊 Predict house prices based on input features
 
-scaling.pkl: The saved feature scaling object (e.g., StandardScaler), crucial for preprocessing new user input before prediction.
+🧠 Machine Learning model trained using Linear Regression
 
-app.py: The Flask application logic that loads the model and handles web requests.
+🔄 Data scaling using StandardScaler
 
-templates/home.html: The HTML frontend for user interaction.
+🌐 REST API endpoint for predictions
 
-⚙️ Setup and Installation
-Prerequisites
-Python 3.x
+🖥 Web interface using HTML templates
 
-Git
+☁️ Deployed on cloud using Gunicorn + Render
 
-Installation Steps
-Clone the repository:
+🛠 Tech Stack
 
-Bash
+Python
 
-git clone https://github.com/YourUsername/YourRepoName.git
-cd YourRepoName
-Create a virtual environment (Recommended):
+Flask
 
-Bash
+Scikit-Learn
 
+NumPy
+
+Pandas
+
+Gunicorn
+
+Render (Cloud Deployment)
+
+📂 Project Structure
+bostonHousePricing/
+│
+├── templates/
+│   └── home.html
+│
+├── app.py
+├── regmodel.pkl
+├── scaling.pkl
+├── requirements.txt
+└── README.md
+
+⚙️ Installation (Run Locally)
+1️⃣ Clone the Repository
+git clone https://github.com/charishmasree6/bostonHousePricing.git
+cd bostonHousePricing
+
+2️⃣ Create Virtual Environment (Optional but Recommended)
 python -m venv venv
-source venv/bin/activate  # macOS/Linux
-# venv\Scripts\activate   # Windows
-Install the required dependencies: All necessary Python libraries are listed in requirements.txt.
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 
-Bash
-
+3️⃣ Install Dependencies
 pip install -r requirements.txt
-🚀 How to Run the Web Application
-The application uses Flask and runs on a local server.
 
-Ensure your virtual environment is active.
+4️⃣ Run the Application
+python app.py
 
-Run the main application file:
 
-Bash
+Open in browser:
 
+http://127.0.0.1:5000/
+
+🔌 API Endpoint
+POST /predict_api
+
+Input (JSON):
+
+{
+  "data": {
+    "feature1": value,
+    "feature2": value
+  }
+}
+
+
+Output:
+
+predicted_price
+
+☁️ Deployment Details
+
+The application is deployed using:
+
+Gunicorn as WSGI server
+
+Render Web Service (Python 3 runtime)
+
+Automatic deployment from GitHub
+
+🧠 Model Details
+
+Algorithm: Linear Regression
+
+Feature Scaling: StandardScaler
+
+Serialized using: Pickle
+
+🎯 Learning Outcomes
+
+Built end-to-end ML pipeline
+
+Converted ML model into REST API
+
+Understood production deployment
+
+Debugged build & runtime errors
+
+Deployed ML app on cloud
 python app.py
 Access the application: Open your web browser and navigate to the address displayed in the terminal (typically http://127.0.0.1:5000).
